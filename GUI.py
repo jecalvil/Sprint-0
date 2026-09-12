@@ -8,14 +8,26 @@ import os
 pygame.init()
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-BG_PATH = os.path.join(SCRIPT_DIR, "wood_background.jpg")
 
-# Create screen and load background
+# Theme Paths
+THEME1_PATH = os.path.join(SCRIPT_DIR, "red_background.jpg")
+THEME2_PATH = os.path.join(SCRIPT_DIR, "wood_background.jpg")
+THEME3_PATH = os.path.join(SCRIPT_DIR, "green_background.jpg")
+
+# Load and Scale Themes
+
+
+# Create screen 
 SCREEN = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Game Menu")
-BG = pygame.image.load(BG_PATH)
+
+# Load Themes
+THEME1 = pygame.image.load(THEME1_PATH)
+THEME2 = pygame.image.load(THEME2_PATH)
+THEME3 = pygame.image.load(THEME3_PATH)
+
 # Make background image scale
-BG = pygame.transform.scale(BG, (1280, 720))
+THEME1 = pygame.transform.scale(THEME1, (1280, 720))
 
 # Fonts
 font = pygame.font.Font(None, 60)
@@ -25,10 +37,12 @@ checkbox_font = pygame.font.Font(None, 23)
 def main_menu():
     # Hints_Enabled? - Checkbox requirement
     hints_toggle = False
+    # Selected Theme
+    selected_theme = THEME1
 
     while True:
         # Draw background image
-        SCREEN.blit(BG, (0,0))
+        SCREEN.blit(selected_theme, (0,0))
 
         # Current Mouse Position
         MENU_MOUSE_POS = pygame.mouse.get_pos()
@@ -62,10 +76,44 @@ def main_menu():
         if hints_toggle:
             pygame.draw.rect(SCREEN, "Yellow", pygame.Rect(555, 605, 20, 20))
             checkbox_text = "HINTS ENABLED"
+        else:
+            checkbox_text = "HINTS DISABLED"
 
         # checkbox label
         label_surface = checkbox_font.render(checkbox_text, True, "White")
         SCREEN.blit(label_surface, (590, 608))
+
+        # -- Create Radio Buttons --
+        # Center coordinates
+        theme1_center = (100,100)
+        theme2_center = (100,150)
+        theme3_center = (100,200)
+        radius = 12
+
+        # -- Create Radio Buttons --
+        theme1_center = (100, 100)
+        theme2_center = (100, 150)
+        theme3_center = (100, 200)
+        radius = 12
+
+        # Radio Button 1 - Red Theme
+        pygame.draw.circle(SCREEN, "White", theme1_center, radius, 2)
+        if selected_theme == THEME1:
+            pygame.draw.circle(SCREEN, "Yellow", theme1_center, radius - 4)
+        SCREEN.blit(checkbox_font.render("Red Theme", True, "White"), (125, 93))
+
+        # Radio Button 2 - Wood Theme
+        pygame.draw.circle(SCREEN, "White", theme2_center, radius, 2)
+        if selected_theme == THEME2:
+            pygame.draw.circle(SCREEN, "Yellow", theme2_center, radius - 4)
+        SCREEN.blit(checkbox_font.render("Wood Theme", True, "White"), (125, 143))
+
+        # Radio Button 3 - Green Theme
+        pygame.draw.circle(SCREEN, "White", theme3_center, radius, 2)
+        if selected_theme == THEME3:
+            pygame.draw.circle(SCREEN, "Yellow", theme3_center, radius - 4)
+        SCREEN.blit(checkbox_font.render("Green Theme", True, "White"), (125, 193))
+
 
         # -- Hover Effect -- 
         if play_rect.collidepoint(MENU_MOUSE_POS):
@@ -103,11 +151,18 @@ def main_menu():
                     print("Game closed") # Add Functionality Later
                     pygame.quit()
                     sys.exit()
+
                 # Menu Checkbox
                 if hints_rect.collidepoint(event.pos):
                     hints_toggle = not hints_toggle
 
-        
+                # Radio Button Clicks
+                if pygame.Vector2(event.pos).distance_to(theme1_center) <= radius:
+                    selected_theme = THEME1
+                elif pygame.Vector2(event.pos).distance_to(theme2_center) <= radius:
+                    selected_theme = THEME2
+                elif pygame.Vector2(event.pos).distance_to(theme3_center) <= radius:
+                    selected_theme = THEME3
 
         # Refresh screen display
         pygame.display.update()
