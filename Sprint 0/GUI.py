@@ -2,6 +2,9 @@ import pygame
 import sys
 import os
 
+# Requirements:
+# Line, Check box, Text
+
 pygame.init()
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -31,6 +34,9 @@ def main_menu():
         title_surface = title_font.render("GAME MENU", True, "White")
         title_rect = title_surface.get_rect(center=(640, 150))
         SCREEN.blit(title_surface, title_rect)
+
+        # Divider Line (Line Requirement)
+        pygame.draw.line(SCREEN, "Black", (440, 180), (840, 180), 4)
 
         # -- Create Buttons --
         # Button 1 - PLAY
