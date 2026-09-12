@@ -1,17 +1,22 @@
 import pygame
 import sys
+import os
 
 pygame.init()
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BG_PATH = os.path.join(SCRIPT_DIR, "wood_background.jpg")
 
 # Create screen and load background
 SCREEN = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Game Menu")
-BG = pygame.image.load("wood_background.jpg")
+BG = pygame.image.load(BG_PATH)
 # Make background image scale
 BG = pygame.transform.scale(BG, (1280, 720))
 
-# Set font
+# Fonts
 font = pygame.font.Font(None, 60)
+title_font = pygame.font.Font(None, 90)
 
 def main_menu():
 
@@ -22,6 +27,10 @@ def main_menu():
         # Current Mouse Position
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
+        # -- Title Text --
+        title_surface = title_font.render("GAME MENU", True, "White")
+        title_rect = title_surface.get_rect(center=(640, 150))
+        SCREEN.blit(title_surface, title_rect)
 
         # -- Create Buttons --
         # Button 1 - PLAY
