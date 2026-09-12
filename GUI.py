@@ -20,8 +20,11 @@ BG = pygame.transform.scale(BG, (1280, 720))
 # Fonts
 font = pygame.font.Font(None, 60)
 title_font = pygame.font.Font(None, 90)
+checkbox_font = pygame.font.Font(None, 23)
 
 def main_menu():
+    # Hints_Enabled? - Checkbox requirement
+    hints_toggle = False
 
     while True:
         # Draw background image
@@ -51,6 +54,19 @@ def main_menu():
         close_surface = font.render("CLOSE GAME", True, "White")
         close_rect = close_surface.get_rect(center=(640, 540))
 
+        # -- Create Checkbox --
+        hints_rect = pygame.Rect(550, 600, 30, 30)
+        pygame.draw.rect(SCREEN, "White", hints_rect, 2)
+        # toggle checkbox
+        checkbox_text = "HINTS DISABLED"
+        if hints_toggle:
+            pygame.draw.rect(SCREEN, "Yellow", pygame.Rect(555, 605, 20, 20))
+            checkbox_text = "HINTS ENABLED"
+
+        # checkbox label
+        label_surface = checkbox_font.render(checkbox_text, True, "White")
+        SCREEN.blit(label_surface, (590, 608))
+
         # -- Hover Effect -- 
         if play_rect.collidepoint(MENU_MOUSE_POS):
             play_surface = font.render("PLAY", True, "Yellow")
@@ -75,6 +91,8 @@ def main_menu():
 
             # Mouse Clicks
             if event.type == pygame.MOUSEBUTTONDOWN:
+
+                # Menu Buttons
                 if play_rect.collidepoint(MENU_MOUSE_POS):
                     print("Play button clicked") # Add Functionality Later
 
@@ -85,6 +103,10 @@ def main_menu():
                     print("Game closed") # Add Functionality Later
                     pygame.quit()
                     sys.exit()
+                # Menu Checkbox
+                if hints_rect.collidepoint(event.pos):
+                    hints_toggle = not hints_toggle
+
         
 
         # Refresh screen display
