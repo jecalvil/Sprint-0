@@ -19,7 +19,7 @@ THEME3_PATH = os.path.join(SCRIPT_DIR, "images", "green_background.jpg")
 # Font Paths
 FONT_PATH = os.path.join(SCRIPT_DIR, "PressStart2P-Regular.ttf")
 
-# Create screen 
+# Create screen
 SCREEN = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Game Menu")
 
@@ -38,6 +38,7 @@ font = pygame.font.Font(FONT_PATH, 40)
 title_font = pygame.font.Font(FONT_PATH, 70)
 checkbox_font = pygame.font.Font(FONT_PATH, 15)
 
+
 def main_menu():
     # Hints_Enabled? - Checkbox requirement
     hints_toggle = False
@@ -49,7 +50,7 @@ def main_menu():
     rules_button = Button("HOW TO PLAY", font, "White", "Yellow", (640, 420))
     close_button = Button("CLOSE GAME", font, "White", "Yellow", (640, 540))
 
-    # -- Radio Buttons -- 
+    # -- Radio Buttons --
     # x-coordinate
     radio1_x = 100
     radio2_x = radio1_x
@@ -63,13 +64,13 @@ def main_menu():
     radio_buttons = [
         RadioButton(radio1_x, radio1_y, 12, "Red Theme", THEME1, checkbox_font),
         RadioButton(radio2_x, radio2_y, 12, "Wood Theme", THEME2, checkbox_font),
-        RadioButton(radio3_x, radio3_y, 12, "Green Theme", THEME3, checkbox_font)
+        RadioButton(radio3_x, radio3_y, 12, "Green Theme", THEME3, checkbox_font),
     ]
 
     # Main menu event and rendering loop
     while True:
         # Draw background image
-        SCREEN.blit(selected_theme, (0,0))
+        SCREEN.blit(selected_theme, (0, 0))
 
         # Current Mouse Position
         MENU_MOUSE_POS = pygame.mouse.get_pos()
@@ -117,10 +118,10 @@ def main_menu():
 
                 # Menu Buttons
                 if play_button.check_click(MENU_MOUSE_POS):
-                    print("Play button clicked") # Add Functionality Later
+                    print("Play button clicked")  # Add Functionality Later
 
                 if rules_button.check_click(MENU_MOUSE_POS):
-                    print("Rules button clicked") # Add Functionality Later
+                    print("Rules button clicked")  # Add Functionality Later
 
                 if close_button.check_click(MENU_MOUSE_POS):
                     print("Game closed")
@@ -142,7 +143,6 @@ def main_menu():
         # Refresh screen display
         pygame.display.update()
 
+
 # Run menu
 main_menu()
-    
-

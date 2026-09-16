@@ -1,5 +1,6 @@
 import unittest
-import calculator #import calculator.py
+import calculator  # import calculator.py
+
 
 class TestCalculatorFunctions(unittest.TestCase):
 
@@ -14,19 +15,19 @@ class TestCalculatorFunctions(unittest.TestCase):
         self.assertEqual(calculator.sub(-1, -1), -0)
 
     def test_div(self):
-        self.assertEqual(calculator.div(10,2), 5)
-        self.assertEqual(calculator.div(10,-2), -5)
+        self.assertEqual(calculator.div(10, 2), 5)
+        self.assertEqual(calculator.div(10, -2), -5)
 
     def test_mul(self):
-        self.assertEqual(calculator.mul(5,5), 25)
-        self.assertEqual(calculator.mul(5,-5), -25)
-        self.assertEqual(calculator.mul(-5,-5), 25)
-        self.assertEqual(calculator.mul(5,0), 0)
+        self.assertEqual(calculator.mul(5, 5), 25)
+        self.assertEqual(calculator.mul(5, -5), -25)
+        self.assertEqual(calculator.mul(-5, -5), 25)
+        self.assertEqual(calculator.mul(5, 0), 0)
 
     def test_divide_by_zero(self):
         with self.assertRaises(ZeroDivisionError):
-            calculator.div(10,0)
+            calculator.div(10, 0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
