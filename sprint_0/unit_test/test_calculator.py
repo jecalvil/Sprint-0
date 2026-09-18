@@ -3,6 +3,7 @@ import calculator  # import calculator.py
 
 
 class TestCalculatorFunctions(unittest.TestCase):
+    """Unit tests for the calculator functions."""
 
     def test_add(self):
         self.assertEqual(calculator.add(10, 5), 15)
@@ -12,7 +13,7 @@ class TestCalculatorFunctions(unittest.TestCase):
     def test_sub(self):
         self.assertEqual(calculator.sub(5, 3), 2)
         self.assertEqual(calculator.sub(-1, 1), -2)
-        self.assertEqual(calculator.sub(-1, -1), -0)
+        self.assertEqual(calculator.sub(-1, -1), 0)
 
     def test_div(self):
         self.assertEqual(calculator.div(10, 2), 5)

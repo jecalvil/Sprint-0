@@ -1,7 +1,11 @@
-import pygame
-import sys
+"""Main menu GUI for the Solitaire game."""
+
 import os
-from components import Button, RadioButton
+import sys
+
+import pygame
+
+import components
 
 # Requirements:
 # Line, Check box, Text
@@ -40,15 +44,16 @@ checkbox_font = pygame.font.Font(FONT_PATH, 15)
 
 
 def main_menu():
+    """Runs the main menu loop until the player closes the game."""
     # Hints_Enabled? - Checkbox requirement
     hints_toggle = False
     # Initial Theme
     selected_theme = THEME1
 
     # Menu Buttons
-    play_button = Button("PLAY", font, "White", "Yellow", (640, 300))
-    rules_button = Button("HOW TO PLAY", font, "White", "Yellow", (640, 420))
-    close_button = Button("CLOSE GAME", font, "White", "Yellow", (640, 540))
+    play_button = components.Button("PLAY", font, "White", "Yellow", (640, 300))
+    rules_button = components.Button("HOW TO PLAY", font, "White", "Yellow", (640, 420))
+    close_button = components.Button("CLOSE GAME", font, "White", "Yellow", (640, 540))
 
     # -- Radio Buttons --
     # x-coordinate
@@ -62,9 +67,15 @@ def main_menu():
 
     # Create radio buttons
     radio_buttons = [
-        RadioButton(radio1_x, radio1_y, 12, "Red Theme", THEME1, checkbox_font),
-        RadioButton(radio2_x, radio2_y, 12, "Wood Theme", THEME2, checkbox_font),
-        RadioButton(radio3_x, radio3_y, 12, "Green Theme", THEME3, checkbox_font),
+        components.RadioButton(
+            radio1_x, radio1_y, 12, "Red Theme", THEME1, checkbox_font
+        ),
+        components.RadioButton(
+            radio2_x, radio2_y, 12, "Wood Theme", THEME2, checkbox_font
+        ),
+        components.RadioButton(
+            radio3_x, radio3_y, 12, "Green Theme", THEME3, checkbox_font
+        ),
     ]
 
     # Main menu event and rendering loop
